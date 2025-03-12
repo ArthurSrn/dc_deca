@@ -1,103 +1,278 @@
-import Image from "next/image";
+'use client'
+import React, { useMemo, useState, useEffect } from 'react';
+import { GoogleMap, LoadScript, Marker, DirectionsService, DirectionsRenderer, Libraries } from '@react-google-maps/api';
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+const containerStyle = {
+  width: '100%',
+  height: '400px'
+};
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+const origin = {
+  lat: 48.864824,
+  lng: 2.334595
+};
+
+const destination = {
+  lat: 48.858370,
+  lng: 2.294481
+};
+
+const waypoints = [
+  {
+    location: { lat: 48.872829842, lng: 2.321332048 },
+    stopover: true
+  },
+  {
+    location: { lat: 48.866667, lng: 2.333333 },
+    stopover: true
+  }
+];
+
+interface Position {
+  lat: number;
+  lng: number;
 }
+
+type ModeDeplacements = 'marche' | 'course';
+
+const libraries: Libraries = ["places"];
+
+const GoogleMapRouteComponent = () => {
+  const [directions, setDirections] = useState<google.maps.DirectionsResult | null>(null);
+  const [travelTime, setTravelTime] = useState<string | null>(null);
+  const [distance, setDistance] = useState<string | null>(null);
+  const [currentPosition, setCurrentPosition] = useState<Position | null>(null);
+  const [icon, setIcon] = useState<google.maps.Icon | null>(null);
+  const pointNames = [
+    "Départ (Louvre)",
+    "Tour Eiffel",
+    "Arc de Triomphe",
+    "Arrivée (Notre-Dame)"
+  ];
+  const [modeDeplacement, setModeDeplacement] = useState<ModeDeplacements>('marche');
+  const [distanceMeters, setDistanceMeters] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(
+        (position) => {
+          setCurrentPosition({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          });
+        },
+        (error) => {
+          console.error('Erreur de géolocalisation:', error);
+        }
+      );
+    } else {
+      console.error("La géolocalisation n'est pas supportée par ce navigateur.");
+    }
+  }, []);
+
+  // Calculer le temps estimé en fonction du mode de déplacement
+  useEffect(() => {
+    if (distanceMeters) {
+      // Vitesse en mètres par seconde
+      const vitesse = modeDeplacement === 'marche' ? 1.4 : 2.8; // 5 km/h pour marche, 10 km/h pour course
+      const tempsEnSecondes = distanceMeters / vitesse;
+
+      // Convertir en heures et minutes
+      const heures = Math.floor(tempsEnSecondes / 3600);
+      const minutes = Math.floor((tempsEnSecondes % 3600) / 60);
+
+      let tempsFormate = '';
+      if (heures > 0) {
+        tempsFormate += `${heures} h `;
+      }
+      tempsFormate += `${minutes} min`;
+
+      setTravelTime(tempsFormate);
+    }
+  }, [modeDeplacement, distanceMeters]);
+
+  const travelMode = "WALKING" as google.maps.TravelMode;
+
+  const directionsOptions = useMemo(() => ({
+    destination: destination,
+    origin: origin,
+    waypoints: waypoints,
+    optimizeWaypoints: true,
+    travelMode: travelMode
+  }), [travelMode]);
+
+  const rendererOptions = useMemo(() => ({
+    polylineOptions: {
+      strokeColor: '#2196F3',
+      strokeWeight: 4,
+      strokeOpacity: 1.0
+    }
+  }), []);
+
+  const directionsCallback = React.useCallback(
+    (
+      result: google.maps.DirectionsResult | null,
+      status: google.maps.DirectionsStatus
+    ) => {
+      if (status === 'OK' && result !== null) {
+        setDirections(result);
+        const route = result.routes[0].legs[0];
+
+        // Stocker la distance en mètres pour le calcul du temps
+        const distanceValue = route.distance?.value || 0;
+        setDistanceMeters(distanceValue);
+
+        // Afficher la distance
+        setDistance(route.distance?.text || null);
+      } else if (status !== 'OK') {
+        console.error('Directions request failed due to ' + status);
+      }
+    },
+    []
+  );
+
+  // Callback pour le chargement de la carte
+  const handleMapLoad = () => {
+    // Une fois la carte chargée, on peut créer l'icône
+    if (window.google && !icon) {
+      setIcon({
+        url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+        scaledSize: new window.google.maps.Size(40, 40)
+      });
+    }
+  };
+
+  const openInGoogleMaps = () => {
+    const waypointsString = waypoints
+      .map(wp => `${wp.location.lat},${wp.location.lng}`)
+      .join('|');
+
+    const url = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${destination.lat},${destination.lng}&waypoints=${waypointsString}&travelmode=walking`;
+
+    window.open(url, '_blank');
+  };
+
+  const goToStart = () => {
+    if (currentPosition) {
+      const url = `https://www.google.com/maps/dir/?api=1&origin=${currentPosition.lat},${currentPosition.lng}&destination=${origin.lat},${origin.lng}&travelmode=walking`;
+      window.open(url, '_blank');
+    }
+  };
+
+  const handleModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setModeDeplacement(e.target.value as ModeDeplacements);
+  };
+
+  return (
+    <LoadScript
+      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
+      libraries={libraries}
+    >
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={currentPosition || origin}
+        zoom={10}
+        onLoad={handleMapLoad}
+      >
+        {currentPosition && (
+          <Marker
+            position={currentPosition}
+            icon={icon ? icon : undefined}
+          />
+        )}
+        <Marker position={origin} />
+        <Marker position={destination} />
+        <DirectionsService
+          options={directionsOptions}
+          callback={directionsCallback}
+        />
+        {directions && (
+          <DirectionsRenderer
+            options={{
+              ...rendererOptions,
+              directions: directions
+            }}
+          />
+        )}
+      </GoogleMap>
+      <div className="p-4">
+        <div className="mb-4">
+          <label htmlFor="modeDeplacement" className="block text-sm font-medium text-gray-300 mb-1">
+            Mode de déplacement
+          </label>
+          <select
+            id="modeDeplacement"
+            value={modeDeplacement}
+            onChange={handleModeChange}
+            className="block max-w-lg px-3 py-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option className='text-gray-950' value="marche">Marche (5 km/h)</option>
+            <option value="course">Course (10 km/h)</option>
+          </select>
+        </div>
+
+        {travelTime && <p className="text-gray-100">Temps estimé : {travelTime}</p>}
+        {distance && <p className="text-gray-400">Distance totale : {distance}</p>}
+
+        <div className="flex gap-4">
+          <button
+            onClick={openInGoogleMaps}
+            className="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="button"
+          >
+            Ouvrir dans Google Maps
+          </button>
+          {currentPosition && (
+            <button
+              onClick={goToStart}
+              className="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="button"
+            >
+              Aller au départ
+            </button>
+          )}
+        </div>
+        {/* Représentation textuelle du trajet */}
+        {directions && directions.routes && directions.routes[0].legs && (
+          <div className="mt-4 p-4 bg-black-50 rounded-lg shadow-sm">
+            <h3 className="text-lg font-semibold mb-3">Détails du trajet</h3>
+            <div className="flex flex-col md:flex-row flex-wrap items-start md:items-center">
+              {directions.routes[0].legs.map((leg, index) => (
+                <React.Fragment key={`text-leg-${index}`}>
+                  {/* Point de départ */}
+                  {index === 0 && (
+                    <div className="flex items-center mb-2 md:mb-0">
+                      <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-bold">
+                        D
+                      </div>
+                      <span className="ml-2 font-medium">{pointNames[0]}</span>
+                    </div>
+                  )}
+
+                  {/* Ligne pointillée et temps */}
+                  <div className="flex items-center mx-0 md:mx-2 my-2 md:my-0 w-full md:w-auto">
+                    <div className="text-blue-500 mx-2 tracking-widest hidden md:block">- - - - -</div>
+                    <div className="border-l-2 border-blue-500 h-6 mx-3 md:hidden"></div>
+                    <div className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                      {leg.duration?.text || ""}
+                    </div>
+                    <div className="text-blue-500 mx-2 tracking-widest hidden md:block">- - - - -</div>
+                  </div>
+
+                  {/* Point intermédiaire ou d'arrivée */}
+                  <div className="flex items-center mb-2 md:mb-0">
+                    <div className={`w-6 h-6 rounded-full ${index === directions.routes[0].legs.length - 1 ? 'bg-red-500' : 'bg-yellow-500'} flex items-center justify-center text-white text-xs font-bold`}>
+                      {index === directions.routes[0].legs.length - 1 ? 'A' : (index + 1)}
+                    </div>
+                    <span className="ml-2 font-medium">{pointNames[index + 1]}</span>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        )}
+
+      </div>
+    </LoadScript>
+  );
+};
+
+export default React.memo(GoogleMapRouteComponent);
