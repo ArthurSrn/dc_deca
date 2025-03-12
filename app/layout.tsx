@@ -18,18 +18,19 @@ export const metadata: Metadata = {
   generator: "Next.js",
   manifest: "/manifest.json",
   keywords: ["nextjs", "next14", "pwa", "next-pwa"],
-  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
+  themeColor: [{ color: "#3643BA" }],
   authors: [
     {
-      name: "imv",
+      name: "Arthur Sornin",
       url: "https://www.linkedin.com",
     },
   ],
+
   viewport:
     "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
   icons: [
-    { rel: "apple-touch-icon", url: "icons/icon-128x128.png" },
-    { rel: "icon", url: "icons/icon-128x128.png" },
+    { rel: "apple-touch-icon", url: "/Logo-128x128.png" },
+    { rel: "icon", url: "/Logo-128x128.png" },
   ],
 };
 
@@ -43,6 +44,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="theme-color" content="#3643BA" />
+        <meta name="background-color" content="#3643BA" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
