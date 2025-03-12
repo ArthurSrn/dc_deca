@@ -18,7 +18,6 @@ export const metadata: Metadata = {
   generator: "Next.js",
   manifest: "/manifest.json",
   keywords: ["nextjs", "next14", "pwa", "next-pwa"],
-  themeColor: [{ color: "#3643BA" }],
   authors: [
     {
       name: "Arthur Sornin",
@@ -26,12 +25,8 @@ export const metadata: Metadata = {
     },
   ],
 
-  viewport:
-    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
-  icons: [
-    { rel: "apple-touch-icon", url: "/Logo-128x128.png" },
-    { rel: "icon", url: "/Logo-128x128.png" },
-  ],
+
+
 };
 
 

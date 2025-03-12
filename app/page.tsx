@@ -1,6 +1,8 @@
 'use client'
 import React, { useMemo, useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, DirectionsService, DirectionsRenderer, Libraries } from '@react-google-maps/api';
+import { ParcoursCollection } from './types/parcours';
+import parcoursData from './data/parcours.json';
 
 const containerStyle = {
   width: '100%',
@@ -37,20 +39,30 @@ type ModeDeplacements = 'marche' | 'course';
 
 const libraries: Libraries = ["places"];
 
+
+
+
 const GoogleMapRouteComponent = () => {
   const [directions, setDirections] = useState<google.maps.DirectionsResult | null>(null);
   const [travelTime, setTravelTime] = useState<string | null>(null);
   const [distance, setDistance] = useState<string | null>(null);
   const [currentPosition, setCurrentPosition] = useState<Position | null>(null);
   const [icon, setIcon] = useState<google.maps.Icon | null>(null);
-  const pointNames = [
-    "Départ (Louvre)",
-    "Tour Eiffel",
-    "Arc de Triomphe",
-    "Arrivée (Notre-Dame)"
-  ];
+  const [parcoursSelectionne, setParcoursSelectionne] = useState<string>('monuments');
+
   const [modeDeplacement, setModeDeplacement] = useState<ModeDeplacements>('marche');
   const [distanceMeters, setDistanceMeters] = useState<number | null>(null);
+
+  const parcours = (parcoursData as ParcoursCollection)[parcoursSelectionne];
+
+
+  const getPointNames = (parcours: ParcoursData) => {
+    return [
+      parcours.origine.nom,
+      ...parcours.pointsIntermediaires.map(point => point.location.nom),
+      parcours.destination.nom
+    ];
+  };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -94,12 +106,12 @@ const GoogleMapRouteComponent = () => {
   const travelMode = "WALKING" as google.maps.TravelMode;
 
   const directionsOptions = useMemo(() => ({
-    destination: destination,
-    origin: origin,
-    waypoints: waypoints,
+    destination: parcours.destination,
+    origin: parcours.origine,
+    waypoints: parcours.pointsIntermediaires,
     optimizeWaypoints: true,
     travelMode: travelMode
-  }), [travelMode]);
+  }), [travelMode, parcoursSelectionne, parcours]);
 
   const rendererOptions = useMemo(() => ({
     polylineOptions: {
@@ -159,10 +171,6 @@ const GoogleMapRouteComponent = () => {
     }
   };
 
-  const handleModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setModeDeplacement(e.target.value as ModeDeplacements);
-  };
-
   return (
     <LoadScript
       googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
@@ -197,19 +205,54 @@ const GoogleMapRouteComponent = () => {
       </GoogleMap>
       <div className="p-4">
         <div className="mb-4">
+          <label htmlFor="parcours" className="block text-sm font-medium text-gray-300 mb-1">
+            Choisir un parcours
+          </label>
+          <select
+            id="parcours"
+            value={parcoursSelectionne}
+            onChange={(e) => setParcoursSelectionne(e.target.value)}
+            className="block max-w-lg px-3 py-2 text-gray-800 bg-white border border-gray-300 rounded-md"
+          >
+            {Object.entries(parcoursData).map(([key, parcours]) => (
+              <option key={key} value={key}>
+                {parcours.nom} - {parcours.distance}
+              </option>
+            ))}
+          </select>
+          <p className="mt-2 text-sm text-gray-400">{parcours.description}</p>
+        </div>
+
+        {/* Ajouter le sélecteur de mode de déplacement */}
+        <div className="mb-4">
           <label htmlFor="modeDeplacement" className="block text-sm font-medium text-gray-300 mb-1">
             Mode de déplacement
           </label>
           <select
             id="modeDeplacement"
             value={modeDeplacement}
-            onChange={handleModeChange}
+            onChange={(e) => setModeDeplacement(e.target.value as ModeDeplacements)}
             className="block max-w-lg px-3 py-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           >
-            <option className='text-gray-950' value="marche">Marche (5 km/h)</option>
+            <option value="marche">Marche (5 km/h)</option>
             <option value="course">Course (10 km/h)</option>
           </select>
         </div>
+
+        {/* Affichage des temps selon le mode */}
+        {distanceMeters && (
+          <div className="mb-4">
+            <p className="text-gray-100">
+              Temps estimé en {modeDeplacement === 'marche' ? 'marchant' : 'courant'} : {travelTime}
+            </p>
+            <p className="text-gray-100 text-sm">
+              {modeDeplacement === 'marche' ?
+                `(En courant : ${Math.floor(distanceMeters / 2.8 / 60)} min)` :
+                `(En marchant : ${Math.floor(distanceMeters / 1.4 / 60)} min)`
+              }
+            </p>
+          </div>
+        )}
 
         {travelTime && <p className="text-gray-100">Temps estimé : {travelTime}</p>}
         {distance && <p className="text-gray-400">Distance totale : {distance}</p>}
@@ -243,7 +286,7 @@ const GoogleMapRouteComponent = () => {
                       <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-bold">
                         D
                       </div>
-                      <span className="ml-2 font-medium">{pointNames[0]}</span>
+                      <span className="ml-2 font-medium">{getPointNames(parcours)[0]}</span>
                     </div>
                   )}
 
@@ -262,7 +305,7 @@ const GoogleMapRouteComponent = () => {
                     <div className={`w-6 h-6 rounded-full ${index === directions.routes[0].legs.length - 1 ? 'bg-red-500' : 'bg-yellow-500'} flex items-center justify-center text-white text-xs font-bold`}>
                       {index === directions.routes[0].legs.length - 1 ? 'A' : (index + 1)}
                     </div>
-                    <span className="ml-2 font-medium">{pointNames[index + 1]}</span>
+                    <span className="ml-2 font-medium">{getPointNames(parcours)[index + 1]}</span>
                   </div>
                 </React.Fragment>
               ))}

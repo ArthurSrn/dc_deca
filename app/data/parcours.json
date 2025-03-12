@@ -1,0 +1,70 @@
+{
+  "monuments": {
+    "nom": "Circuit des Monuments",
+    "origine": {
+      "lat": 48.864824,
+      "lng": 2.334595,
+      "nom": "Louvre"
+    },
+    "destination": {
+      "lat": 48.85837,
+      "lng": 2.294481,
+      "nom": "Notre-Dame"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 48.85837,
+          "lng": 2.294481,
+          "nom": "Tour Eiffel"
+        },
+        "stopover": true
+      },
+      {
+        "location": {
+          "lat": 48.866667,
+          "lng": 2.333333,
+          "nom": "Arc de Triomphe"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Un parcours qui vous fait découvrir les monuments les plus emblématiques de Paris",
+    "distance": "6.5 km",
+    "dureeEstimee": "1h30"
+  },
+  "musees": {
+    "nom": "Circuit des Musées",
+    "origine": {
+      "lat": 48.861475,
+      "lng": 2.338274,
+      "nom": "Centre Pompidou"
+    },
+    "destination": {
+      "lat": 48.860294,
+      "lng": 2.326499,
+      "nom": "Musée d'Orsay"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 48.864824,
+          "lng": 2.334595,
+          "nom": "Louvre"
+        },
+        "stopover": true
+      },
+      {
+        "location": {
+          "lat": 48.858844,
+          "lng": 2.332784,
+          "nom": "Musée Cluny"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Une balade culturelle à travers les plus grands musées parisiens",
+    "distance": "4.2 km",
+    "dureeEstimee": "1h"
+  }
+}
