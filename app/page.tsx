@@ -1,7 +1,7 @@
 'use client'
 import React, { useMemo, useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, DirectionsService, DirectionsRenderer, Libraries } from '@react-google-maps/api';
-import { ParcoursCollection } from './types/parcours';
+import { ParcoursCollection, ParcoursData } from './types/parcours';
 import parcoursData from './data/parcours.json';
 
 const containerStyle = {
