@@ -54,18 +54,9 @@ export default function Onboarding() {
                 {/* Text content */}
                 <div className="text-center space-y-4">
                     <h1 className="text-2xl font-bold">
-                        Merci ! Juste un moment, nous préparons ton expérience.
+                        MERCI ! JUSTE UN MOMENT, NOUS PRÉPARONS TON EXPÉRIENCE.
                     </h1>
-
                 </div>
-
-                {/* Button */}
-                {/* <button
-                    onClick={onStart}
-                    className="bg-white text-[#3643BA]  w-full px-8 py-3 rounded-lg font-extrabold hover:bg-opacity-90 transition-all"
-                >
-                    COMMENCER
-                </button> */}
             </div>
         </div>
     )

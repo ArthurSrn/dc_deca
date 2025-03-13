@@ -1,13 +1,10 @@
 "use client"
 import Link from "next/link";
 
-
-export default function Onboarding() {
-
-
+export default function Commencer() {
     return (
         <div className="relative h-screen w-full max-w-lg mx-auto bg-[#3643BA] flex flex-col items-center justify-center text-white">
-            <div className="flex flex-col items-center space-y-8">
+            <div className="flex flex-col items-center space-y-8 w-full p-4">
                 {/* Logo/Icon */}
                 <svg xmlns="http://www.w3.org/2000/svg" width="196" height="203" viewBox="0 0 196 203" fill="none">
                     <path d="M24.6074 196.905L89.2396 136.931L92.1196 77.0112H95.5696L139.06 117.251L143.854 201.637" stroke="#ADFE04" strokeWidth="13" strokeMiterlimit="10" />
@@ -22,18 +19,15 @@ export default function Onboarding() {
                     <rect x="0.708984" y="199.519" width="195.467" height="2.96162" fill="#ADFE04" />
                 </svg>
 
-                {/* Text content */}
                 <div className="text-center space-y-4">
                     <h1 className="text-2xl font-bold">
-                        C’est parti !
+                        C&apos;EST PARTI !
                     </h1>
-
                 </div>
 
-                {/* Button */}
-                <Link href="/home">
+                <Link href="/home" className="w-full mt-24">
                     <button
-                        className="bg-white text-[#3643BA]  w-full px-8 py-3 rounded-lg font-extrabold hover:bg-opacity-90 transition-all"
+                        className="bg-white text-[#3643BA] w-full px-8 py-3 rounded-lg font-extrabold hover:bg-opacity-90 transition-all"
                     >
                         COMMENCER
                     </button>
