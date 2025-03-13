@@ -50,7 +50,7 @@ export default function LoginForm() {
                 },
                 onSuccess: () => {
                     toast.success("Connexion réussie");
-                    router.push("/formulaire");
+                    router.push("/start");
                 },
                 onError: (error) => {
                     console.error(error);

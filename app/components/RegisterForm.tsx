@@ -66,7 +66,7 @@ export default function RegisterForm() {
                 },
                 onSuccess: () => {
                     toast.success("Compte créé avec succès");
-                    router.push("/formulaire");
+                    router.push("/start");
                 },
                 onError: (error) => {
                     console.error(error);

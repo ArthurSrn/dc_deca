@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 interface FormOption {
@@ -66,7 +67,12 @@ const StepTitle4 = () => (
     </h1>
 );
 
-export default function MultiStepForm() {
+interface MultiStepFormProps {
+    onComplete: () => void;
+}
+
+export default function MultiStepForm({ onComplete }: MultiStepFormProps) {
+    const router = useRouter();
     const [currentStep, setCurrentStep] = useState(1);
     const totalSteps = 4;
 
@@ -140,6 +146,9 @@ export default function MultiStepForm() {
                 goals: selectedGoals,
                 interests: selectedInterests
             });
+            onComplete();
+            // Utilisez router.push pour la navigation
+            router.push('/parti'); // ou toute autre route de destination
         }
     };
 
