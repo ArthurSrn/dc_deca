@@ -45,3 +45,9 @@ certificates
 # Auto Generated PWA files
 **/public/sw.js
 **/public/workbox-*.js
+
+# Prisma
+/prisma/*.db
+/prisma/migrations/dev/
+prisma/dev.db
+prisma/dev.db-journal
