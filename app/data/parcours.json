@@ -1,6 +1,8 @@
 {
   "monuments": {
     "nom": "Circuit des Monuments",
+    "ville": "Paris",
+    "niveau": "débutant",
     "origine": {
       "lat": 48.864824,
       "lng": 2.334595,
@@ -31,10 +33,20 @@
     ],
     "description": "Un parcours qui vous fait découvrir les monuments les plus emblématiques de Paris",
     "distance": "6.5 km",
-    "dureeEstimee": "1h30"
+    "dureeEstimee": "1h30",
+    "type": "marche à pieds",
+    "dureeMarche": "1h30",
+    "dureeCourse": "45min",
+    "calories": 450,
+    "vitesse": "6.5 ",
+    "denivele": "85m",
+    "bpm": "",
+    "imageUrl": "https://www.urbansider.com/wp-content/themes/yootheme/cache/7d/Paris-Running-1-e1618273088331-7d60837f.webp"
   },
   "musees": {
     "nom": "Circuit des Musées",
+    "ville": "Paris",
+    "niveau": "débutant",
     "origine": {
       "lat": 48.861475,
       "lng": 2.338274,
@@ -65,6 +77,478 @@
     ],
     "description": "Une balade culturelle à travers les plus grands musées parisiens",
     "distance": "4.2 km",
-    "dureeEstimee": "1h"
+    "dureeEstimee": "1h",
+    "type": "marche à pieds",
+    "dureeMarche": "1h",
+    "dureeCourse": "30min",
+    "calories": 320,
+    "vitesse": "5.8 ",
+    "denivele": "45m",
+    "bpm": "",
+    "imageUrl": "https://pro.visitparisregion.com/var/crt_idf/storage/images/_aliases/xlarge/7/0/6/8/1108607-1-fre-FR/2017-02-02-Paris-Running-Tours-1.jpg"
+  },
+  "lyon_historique": {
+    "nom": "Circuit du Vieux Lyon",
+    "ville": "Lyon",
+    "niveau": "intermédiaire",
+    "origine": {
+      "lat": 45.762089,
+      "lng": 4.83257,
+      "nom": "Place Bellecour"
+    },
+    "destination": {
+      "lat": 45.760569,
+      "lng": 4.823106,
+      "nom": "Basilique de Fourvière"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 45.759738,
+          "lng": 4.827913,
+          "nom": "Cathédrale Saint-Jean"
+        },
+        "stopover": true
+      },
+      {
+        "location": {
+          "lat": 45.762825,
+          "lng": 4.828911,
+          "nom": "Théâtres Romains"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Une découverte du patrimoine historique lyonnais",
+    "distance": "5.2 km",
+    "dureeEstimee": "1h15",
+    "type": "footing",
+    "dureeMarche": "1h15",
+    "dureeCourse": "40min",
+    "calories": 380,
+    "vitesse": "7.2 ",
+    "denivele": "120m",
+    "bpm": "",
+    "imageUrl": "https://www.airzen.fr/wp-content/uploads/2022/10/runing-tour-2-1024x768.jpg"
+  },
+  "marseille_calanques": {
+    "nom": "Circuit des Calanques",
+    "ville": "Marseille",
+    "niveau": "expert",
+    "origine": {
+      "lat": 43.218906,
+      "lng": 5.353368,
+      "nom": "Vieux-Port"
+    },
+    "destination": {
+      "lat": 43.216667,
+      "lng": 5.333333,
+      "nom": "Calanque de Sugiton"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 43.215833,
+          "lng": 5.348889,
+          "nom": "Notre-Dame de la Garde"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Un parcours spectaculaire le long des calanques marseillaises",
+    "distance": "10.5 km",
+    "dureeEstimee": "3h",
+    "type": "footing",
+    "dureeMarche": "3h",
+    "dureeCourse": "1h30",
+    "calories": 850,
+    "vitesse": "8.5 ",
+    "denivele": "350m",
+    "bpm": "",
+    "imageUrl": "https://nicolasjacquemin.fr/wp-content/uploads/2019/08/running-paris-asics-frontrunners-run-course-a-pied-photo-photographe-nicolas-jacquemin-sport_0001.jpg"
+  },
+  "bordeaux_vignobles": {
+    "nom": "Circuit des Vignobles",
+    "ville": "Bordeaux",
+    "niveau": "intermédiaire",
+    "origine": {
+      "lat": 44.837789,
+      "lng": -0.57918,
+      "nom": "Place de la Bourse"
+    },
+    "destination": {
+      "lat": 44.838333,
+      "lng": -0.566667,
+      "nom": "Cité du Vin"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 44.841667,
+          "lng": -0.573333,
+          "nom": "Grand Théâtre"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Une promenade urbaine à travers l'histoire viticole de Bordeaux",
+    "distance": "5.8 km",
+    "dureeEstimee": "1h30",
+    "type": "marche à pieds",
+    "dureeMarche": "1h30",
+    "dureeCourse": "45min",
+    "calories": 420,
+    "vitesse": "6.2 ",
+    "denivele": "65m",
+    "bpm": "",
+    "imageUrl": "https://secretsofparis.com/wp-content/uploads/2012/03/18kEiffelTower.jpg"
+  },
+  "strasbourg_petite_france": {
+    "nom": "Circuit de la Petite France",
+    "ville": "Strasbourg",
+    "niveau": "débutant",
+    "origine": {
+      "lat": 48.580932,
+      "lng": 7.742197,
+      "nom": "Place Kléber"
+    },
+    "destination": {
+      "lat": 48.580141,
+      "lng": 7.738493,
+      "nom": "Cathédrale Notre-Dame"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 48.578245,
+          "lng": 7.743618,
+          "nom": "Petite France"
+        },
+        "stopover": true
+      },
+      {
+        "location": {
+          "lat": 48.581707,
+          "lng": 7.742766,
+          "nom": "Palais Rohan"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Une promenade pittoresque à travers le quartier historique de la Petite France",
+    "distance": "3 km",
+    "dureeEstimee": "45 min",
+    "type": "marche à pieds",
+    "dureeMarche": "45min",
+    "dureeCourse": "25min",
+    "calories": 280,
+    "vitesse": "5.5 ",
+    "denivele": "25m",
+    "bpm": "",
+    "imageUrl": "https://www.urbansider.com/wp-content/themes/yootheme/cache/7d/Paris-Running-1-e1618273088331-7d60837f.webp"
+  },
+  "lille_vieux_lille": {
+    "nom": "Balade du Vieux Lille",
+    "ville": "Lille",
+    "niveau": "débutant",
+    "origine": {
+      "lat": 50.637222,
+      "lng": 3.063333,
+      "nom": "Grand Place"
+    },
+    "destination": {
+      "lat": 50.641111,
+      "lng": 3.075278,
+      "nom": "Citadelle de Lille"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 50.638889,
+          "lng": 3.066944,
+          "nom": "Vieille Bourse"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Une découverte des charmes du Vieux Lille et de ses monuments",
+    "distance": "5 km",
+    "dureeEstimee": "1h15",
+    "type": "footing",
+    "dureeMarche": "1h15",
+    "dureeCourse": "40min",
+    "calories": 380,
+    "vitesse": "6.8 ",
+    "denivele": "55m",
+    "bpm": "",
+    "imageUrl": "https://pro.visitparisregion.com/var/crt_idf/storage/images/_aliases/xlarge/7/0/6/8/1108607-1-fre-FR/2017-02-02-Paris-Running-Tours-1.jpg"
+  },
+  "nice_promenade": {
+    "nom": "Promenade des Anglais",
+    "ville": "Nice",
+    "niveau": "débutant",
+    "origine": {
+      "lat": 43.695949,
+      "lng": 7.2655,
+      "nom": "Place Masséna"
+    },
+    "destination": {
+      "lat": 43.697124,
+      "lng": 7.289133,
+      "nom": "Port de Nice"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 43.694208,
+          "lng": 7.275877,
+          "nom": "Jardin Albert 1er"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Une balade ensoleillée le long de la célèbre Promenade des Anglais",
+    "distance": "3.5 km",
+    "dureeEstimee": "50 min",
+    "type": "footing",
+    "dureeMarche": "50min",
+    "dureeCourse": "25min",
+    "calories": 290,
+    "vitesse": "5.2 ",
+    "denivele": "15m",
+    "bpm": "",
+    "imageUrl": "https://www.airzen.fr/wp-content/uploads/2022/10/runing-tour-2-1024x768.jpg"
+  },
+  "toulouse_capitole": {
+    "nom": "Circuit du Capitole",
+    "ville": "Toulouse",
+    "niveau": "intermédiaire",
+    "origine": {
+      "lat": 43.6045,
+      "lng": 1.444,
+      "nom": "Place du Capitole"
+    },
+    "destination": {
+      "lat": 43.599722,
+      "lng": 1.433056,
+      "nom": "Basilique Saint-Sernin"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 43.600833,
+          "lng": 1.450278,
+          "nom": "Pont Neuf"
+        },
+        "stopover": true
+      },
+      {
+        "location": {
+          "lat": 43.598333,
+          "lng": 1.441667,
+          "nom": "Couvent des Jacobins"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Un parcours à travers la ville rose et ses monuments emblématiques",
+    "distance": "5.2 km",
+    "dureeEstimee": "1h20",
+    "type": "marche à pieds",
+    "dureeMarche": "1h20",
+    "dureeCourse": "40min",
+    "calories": 410,
+    "vitesse": "6.4 ",
+    "denivele": "75m",
+    "bpm": "",
+    "imageUrl": "https://nicolasjacquemin.fr/wp-content/uploads/2019/08/running-paris-asics-frontrunners-run-course-a-pied-photo-photographe-nicolas-jacquemin-sport_0001.jpg"
+  },
+  "nantes_machines": {
+    "nom": "Parcours des Machines",
+    "ville": "Nantes",
+    "niveau": "débutant",
+    "origine": {
+      "lat": 47.216389,
+      "lng": -1.554444,
+      "nom": "Château des Ducs de Bretagne"
+    },
+    "destination": {
+      "lat": 47.205833,
+      "lng": -1.563889,
+      "nom": "Les Machines de l'Île"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 47.213889,
+          "lng": -1.561111,
+          "nom": "Place Graslin"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Une découverte de Nantes entre histoire et créations artistiques contemporaines",
+    "distance": "3.8 km",
+    "dureeEstimee": "55 min",
+    "type": "marche à pieds",
+    "dureeMarche": "55min",
+    "dureeCourse": "30min",
+    "calories": 300,
+    "vitesse": "5.9 ",
+    "denivele": "35m",
+    "bpm": "",
+    "imageUrl": "https://secretsofparis.com/wp-content/uploads/2012/03/18kEiffelTower.jpg"
+  },
+  "annecy_lac": {
+    "nom": "Tour du Lac d'Annecy",
+    "ville": "Annecy",
+    "niveau": "expert",
+    "origine": {
+      "lat": 45.899247,
+      "lng": 6.129384,
+      "nom": "Vieille Ville d'Annecy"
+    },
+    "destination": {
+      "lat": 45.899247,
+      "lng": 6.129384,
+      "nom": "Vieille Ville d'Annecy"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 45.856944,
+          "lng": 6.171667,
+          "nom": "Plage d'Albigny"
+        },
+        "stopover": true
+      },
+      {
+        "location": {
+          "lat": 45.839722,
+          "lng": 6.198611,
+          "nom": "Château de Duingt"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Un parcours magnifique autour du lac d'Annecy avec des vues imprenables",
+    "distance": "10.5 km",
+    "dureeEstimee": "2h30",
+    "type": "footing",
+    "dureeMarche": "2h30",
+    "dureeCourse": "1h15",
+    "calories": 780,
+    "vitesse": "7.8 ",
+    "denivele": "180m",
+    "bpm": "",
+    "imageUrl": "https://www.urbansider.com/wp-content/themes/yootheme/cache/7d/Paris-Running-1-e1618273088331-7d60837f.webp"
+  },
+  "montpellier_comedie": {
+    "nom": "Circuit de la Comédie",
+    "ville": "Montpellier",
+    "niveau": "débutant",
+    "origine": {
+      "lat": 43.608889,
+      "lng": 3.8775,
+      "nom": "Place de la Comédie"
+    },
+    "destination": {
+      "lat": 43.614167,
+      "lng": 3.873611,
+      "nom": "Jardin des Plantes"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 43.613056,
+          "lng": 3.876944,
+          "nom": "Musée Fabre"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Une promenade urbaine à travers le centre historique de Montpellier",
+    "distance": "3.2 km",
+    "dureeEstimee": "45 min",
+    "type": "marche à pieds",
+    "dureeMarche": "45min",
+    "dureeCourse": "25min",
+    "calories": 250,
+    "vitesse": "5.4 ",
+    "denivele": "30m",
+    "bpm": "",
+    "imageUrl": "https://pro.visitparisregion.com/var/crt_idf/storage/images/_aliases/xlarge/7/0/6/8/1108607-1-fre-FR/2017-02-02-Paris-Running-Tours-1.jpg"
+  },
+  "dijon_chouette": {
+    "nom": "Parcours de la Chouette",
+    "ville": "Dijon",
+    "niveau": "débutant",
+    "origine": {
+      "lat": 47.322047,
+      "lng": 5.041481,
+      "nom": "Place de la Libération"
+    },
+    "destination": {
+      "lat": 47.319722,
+      "lng": 5.036944,
+      "nom": "Musée des Beaux-Arts"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 47.321944,
+          "lng": 5.038889,
+          "nom": "Église Notre-Dame"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Suivez la chouette pour découvrir les trésors cachés de Dijon",
+    "distance": "2.8 km",
+    "dureeEstimee": "40 min",
+    "type": "marche à pieds",
+    "dureeMarche": "40min",
+    "dureeCourse": "20min",
+    "calories": 220,
+    "vitesse": "5.1 ",
+    "denivele": "25m",
+    "bpm": "",
+    "imageUrl": "https://nicolasjacquemin.fr/wp-content/uploads/2019/08/running-paris-asics-frontrunners-run-course-a-pied-photo-photographe-nicolas-jacquemin-sport_0001.jpg"
+  },
+  "rennes_thabor": {
+    "nom": "Balade du Thabor",
+    "ville": "Rennes",
+    "niveau": "intermédiaire",
+    "origine": {
+      "lat": 48.114722,
+      "lng": -1.679444,
+      "nom": "Place de la Mairie"
+    },
+    "destination": {
+      "lat": 48.114167,
+      "lng": -1.669722,
+      "nom": "Parc du Thabor"
+    },
+    "pointsIntermediaires": [
+      {
+        "location": {
+          "lat": 48.113889,
+          "lng": -1.675278,
+          "nom": "Cathédrale Saint-Pierre"
+        },
+        "stopover": true
+      }
+    ],
+    "description": "Une découverte du centre historique de Rennes jusqu'au magnifique parc du Thabor",
+    "distance": "4.5 km",
+    "dureeEstimee": "1h10",
+    "type": "footing",
+    "dureeMarche": "1h10",
+    "dureeCourse": "35min",
+    "calories": 350,
+    "vitesse": "6.1 ",
+    "denivele": "45m",
+    "bpm": "",
+    "imageUrl": "https://www.airzen.fr/wp-content/uploads/2022/10/runing-tour-2-1024x768.jpg"
   }
 }

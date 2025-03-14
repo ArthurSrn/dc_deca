@@ -20,3 +20,32 @@ export interface ParcoursData {
 }
 
 export type ParcoursCollection = Record<string, ParcoursData>;
+
+export interface ParcoursType {
+  nom: string;
+  ville: string;
+  niveau: string;
+  image: string;
+  description: string;
+  distance: string;
+  dureeEstimee: string;
+  urlImage: string;
+  origine: {
+    nom: string;
+    lat: number;
+    lng: number;
+  };
+  destination: {
+    nom: string;
+    lat: number;
+    lng: number;
+  };
+  pointsIntermediaires: Array<{
+    location: {
+      nom: string;
+      lat: number;
+      lng: number;
+    };
+    stopover: boolean;
+  }>;
+}
